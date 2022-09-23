@@ -1,0 +1,51 @@
+#!/bin/ash -e
+
+drop_to_shell() {
+    printf 'Encountered an unexpected error, starting a shell\n'
+    exec /bin/ash -l
+}
+
+# If anything happens before the final exec, drop to a shell
+trap drop_to_shell EXIT
+
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+mount -t proc proc /proc
+mount -t devtmpfs dev /dev
+mount -t sysfs sys /sys
+
+set -- $(cat /proc/cmdline)
+for word in "$@"; do
+    case "$word" in
+        root=UUID=*)
+            partuuid="${word##*=}"
+            rootpart=$(blkid | grep -i "$partuuid" | cut -d: -f1)
+            if [ -n "$rootpart" ] ; then
+                rootdev=$(readlink "/sys/class/block/${rootpart#/dev/}")
+                rootdev=${rootdev%/*}
+                rootdev="/dev/${rootdev##*/}"
+            fi
+            ;;
+        root=*)
+	    	rootdev="${word##*=}"
+	    	rootpart="${word##*=}"
+	    	;;
+        livecd|rescue) rootdev=tmpfs ;;
+    esac
+done
+
+install -d /mnt
+if [ -z "$rootdev" ] || [ "$rootdev" = 'tmpfs' ]; then
+    mount -t tmpfs tmpfs-root /mnt
+    find / -not -path "/proc/*" -not -path "/sys/*" -not -path "/dev/*" | \
+        cpio -dump /mnt >/dev/null 2>&1
+else
+    # Check the root partition
+    fsck -fy "$rootpart"
+    mount "$rootpart" /mnt
+fi
+
+install -d /mnt/proc /mnt/dev /mnt/sys
+[ -c /mnt/dev/console ] || mknod -m 600 /mnt/dev/console c 5 1
+[ -c /mnt/dev/null ] || mknod -m 666 /mnt/dev/null c 1 3
+
+exec switch_root /mnt /sbin/init
