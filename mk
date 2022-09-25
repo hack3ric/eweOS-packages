@@ -17,6 +17,8 @@ mknod -m 666 "${ROOT}/dev/null" c 1 3
 
 PKGS=(
   musl
+  utmps
+  skalibs
   filesystem
   busybox
   util-linux
