@@ -18,30 +18,36 @@ for word in "$@"; do
     case "$word" in
         root=UUID=*)
             partuuid="${word##*=}"
-            rootpart=$(blkid | grep -i "$partuuid" | cut -d: -f1)
-            if [ -n "$rootpart" ] ; then
-                rootdev=$(readlink "/sys/class/block/${rootpart#/dev/}")
-                rootdev=${rootdev%/*}
-                rootdev="/dev/${rootdev##*/}"
-            fi
+            rootdev=$(blkid | grep -i "$partuuid" | cut -d: -f1)
+            ;;
+        root=LABEL=*)
+            partlabel="${word##*=}"
+            rootdev=$(lsblk -o PATH,LABEL | grep "$partlabel" | cut -d ' ' -f1)
             ;;
         root=*)
-	    	rootdev="${word##*=}"
-	    	rootpart="${word##*=}"
-	    	;;
+	    rootdev="${word##*=}"
+	    ;;
         livecd|rescue) rootdev=tmpfs ;;
     esac
 done
 
 install -d /mnt
-if [ -z "$rootdev" ] || [ "$rootdev" = 'tmpfs' ]; then
+
+if [ -z "$rootdev" ]; then
+    rootdev=$(lsblk -o PATH,LABEL | grep "EWE_ROOT" | cut -d ' ' -f1)
+    if [ -z "$rootdev" ]; then
+        rootdev=tmpfs
+    fi
+fi
+
+if [ "$rootdev" = 'tmpfs' ]; then
+    root
     mount -t tmpfs tmpfs-root /mnt
     find / -not -path "/proc/*" -not -path "/sys/*" -not -path "/dev/*" | \
         cpio -dump /mnt >/dev/null 2>&1
 else
-    # Check the root partition
-    fsck -fy "$rootpart"
-    mount "$rootpart" /mnt
+    fsck -fy "$rootdev"
+    mount "$rootdev" /mnt
 fi
 
 install -d /mnt/proc /mnt/dev /mnt/sys

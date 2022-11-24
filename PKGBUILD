@@ -1,7 +1,7 @@
 # Maintainer: Yukari Chiba <i@0x7f.cc>
 
 pkgname=mkinitramfs
-pkgver=0.1.0
+pkgver=0.1.1
 pkgrel=1
 pkgdesc='initramfs scripts for eweOS'
 arch=('x86_64')
