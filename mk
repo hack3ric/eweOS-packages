@@ -28,7 +28,7 @@ PKGS=(
 
 for pkg in ${PKGS[@]}; do
   pacman -Ql $pkg | cut -f 2 -d ' ' | while read fpath ; do
-    echo $fpath | cpio -pd $ROOT
+    echo $fpath | cpio -pd $ROOT --quiet
   done
 done
 
