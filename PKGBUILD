@@ -1,10 +1,10 @@
 # Maintainer: Yukari Chiba <i@0x7f.cc>
 
 pkgname=gettext
-pkgver=0.21
+pkgver=0.21.1
 pkgrel=1
 pkgdesc="GNU internationalization library"
-arch=(x86_64)
+arch=(x86_64 aarch64)
 license=(GPL3)
 groups=(base-devel)
 depends=(acl)
@@ -13,7 +13,8 @@ options=(!docs)
 source=(https://ftp.gnu.org/pub/gnu/gettext/$pkgname-$pkgver.tar.gz)
 sha256sums=('SKIP')
 
-build() {
+build()
+{
   cd $pkgname-$pkgver
 
   ./configure \
@@ -24,13 +25,13 @@ build() {
     --without-included-gettext
 
   sed -e 's/ -shared / -Wl,-O1,--as-needed\0/g' \
-      -i gettext-{tools,runtime,runtime/libasprintf}/libtool
+    -i gettext-{tools,runtime,runtime/libasprintf}/libtool
 
   make
 }
 
-package() {
+package()
+{
   cd $pkgname-$pkgver
   make DESTDIR="$pkgdir" install
 }
-
