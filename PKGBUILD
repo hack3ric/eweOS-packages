@@ -1,15 +1,16 @@
 # Maintainer: Yukari Chiba <i@0x7f.cc>
 
 pkgname=mkinitramfs
-pkgver=0.1.1
+pkgver=0.2.1
 pkgrel=1
 pkgdesc='initramfs scripts for eweOS'
-arch=('x86_64')
+arch=(any)
 depends=('e2fsprogs' 'util-linux' 'util-linux-libs' 'musl' 'busybox')
 source=("init.in" "mk")
 sha256sums=('SKIP' 'SKIP')
 
-package() {
+package()
+{
   install -dm755 "$pkgdir/usr/share/mkinitramfs"
   install -dm755 "$pkgdir/usr/bin"
   install -m 0755 "init.in" "$pkgdir/usr/share/mkinitramfs/init.in"
