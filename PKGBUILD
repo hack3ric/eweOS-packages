@@ -2,7 +2,7 @@
 
 pkgname=gettext
 pkgver=0.21.1
-pkgrel=1
+pkgrel=2
 pkgdesc="GNU internationalization library"
 arch=(x86_64 aarch64)
 license=(GPL3)
@@ -23,9 +23,6 @@ build()
     --enable-nls \
     --with-xz \
     --without-included-gettext
-
-  sed -e 's/ -shared / -Wl,-O1,--as-needed\0/g' \
-    -i gettext-{tools,runtime,runtime/libasprintf}/libtool
 
   make
 }
