@@ -9,7 +9,7 @@ license=(GPL3)
 groups=(base-devel)
 depends=(acl)
 makedepends=(gettext)
-options=(!docs)
+options=(!docs !buildflags)
 source=(https://ftp.gnu.org/pub/gnu/gettext/$pkgname-$pkgver.tar.gz)
 sha256sums=('SKIP')
 
