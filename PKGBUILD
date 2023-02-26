@@ -2,7 +2,7 @@
 
 pkgname='binutils-objcopy'
 pkgver=2.39
-pkgrel=0
+pkgrel=1
 pkgdesc='Part of binutils'
 arch=(x86_64 aarch64)
 url='https://github.com/eweOS/binutils-copy'
@@ -13,8 +13,11 @@ sha256sums=('SKIP')
 
 build()
 {
+
+  CONFFLAGS="--host=$CHOST --build=$CHOST"
+
   cd binutils-objcopy-${pkgver}
-  cd bfd && ./configure --with-system-zlib --disable-werror && make -i
+  cd bfd && ./configure --with-system-zlib --disable-werror $CONFFLAGS && make -i
   cd ../libiberty && ./configure && make -i
   cd .. && ./build.sh
 }
