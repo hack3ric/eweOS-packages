@@ -9,7 +9,7 @@ arch=(x86_64)
 license=('MIT')
 depends=('musl' 'lua')
 source=("https://github.com/ziyao233/lmerge/archive/refs/tags/v0.1.2.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('33a4c613257c23dcaf39e7b5f4ff146d21eab210a2f49456252a41f7af1b111e')
 
 package() {
 	cd lmerge-${pkgver}/src
