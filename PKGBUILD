@@ -11,7 +11,7 @@ depends=(acl)
 makedepends=(gettext)
 options=(!docs !buildflags)
 source=(https://ftp.gnu.org/pub/gnu/gettext/$pkgname-$pkgver.tar.gz)
-sha256sums=('SKIP')
+sha256sums=('e8c3650e1d8cee875c4f355642382c1df83058bd5a11ee8555c0cf276d646d45')
 
 build()
 {
