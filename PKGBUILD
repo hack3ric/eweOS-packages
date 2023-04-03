@@ -9,7 +9,7 @@ url='https://github.com/eweOS/binutils-copy'
 license=('GPL3' 'GPL' 'FDL1.3')
 depends=(musl zlib)
 source=("https://github.com/eweOS/binutils-objcopy/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('9c9a7831525d05ee7fa0c157e574b33f28d0485d63faa2f6d459977b42d24879')
 
 build()
 {
