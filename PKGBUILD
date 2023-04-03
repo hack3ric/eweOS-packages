@@ -7,7 +7,7 @@ arch=(x86_64 aarch64)
 url="https://github.com/adoptium/temurin18-binaries"
 license=('GPL2')
 source=("${url}/releases/download/jdk-${pkgver}%2B1/OpenJDK18U-jdk_x64_alpine-linux_hotspot_${pkgver}_1.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('478c8f56dec7378ed8c687e8d7d0fbf729973c62c497cfc8cf58bd621849d764')
 
 package()
 {
