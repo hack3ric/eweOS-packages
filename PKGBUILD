@@ -9,7 +9,7 @@ url='https://github.com/eweOS/binutils-gold'
 license=('GPL3' 'GPL' 'FDL1.3')
 depends=(musl zlib)
 source=("https://github.com/eweOS/binutils-gold/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('2643fea16d6656b321af10291d2afe6a1c0c8b8445832d85905849840e099f25')
 
 build()
 {
