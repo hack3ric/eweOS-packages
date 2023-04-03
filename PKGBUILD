@@ -10,7 +10,7 @@ arch=(x86_64 aarch64)
 license=('MIT')
 depends=('musl' 'lua')
 source=("ewe-pkgtool.zip::https://github.com/eweOS/ewe-pkgtool/archive/$_commit.zip")
-sha256sums=('SKIP')
+sha256sums=('b03a12ef9481e09bdf81807c60af4f1bf513968119d8e20c45dbc948e69a7fc9')
 
 package() {
 	cd ewe-pkgtool-$_commit
