@@ -9,7 +9,7 @@ url="http://jjacky.com/$pkgname"
 license=('GPL2+')
 depends=("pam")
 source=("$url/$pkgname-$pkgver.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('c779b699ed23777a3bdba87b7f67ed395fe957f3c96138faee45f87a27bcc020')
 
 build() {
   cd $pkgname-$pkgver
