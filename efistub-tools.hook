@@ -7,4 +7,4 @@ Target = usr/lib/modules/*/vmlinuz
 [Action]
 Description = Regenerating EFI Stub...
 When = PostTransaction
-Exec = genefistub
+Exec = /usr/bin/genefistub
