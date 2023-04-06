@@ -6,8 +6,8 @@ if [ -z $VER ]; then
   VER=$(ls /usr/lib/modules | cut -d ' ' -f 1)
 fi
 
-IMG_DIR=$(mktemp)
-tinyramfs -f -k $VER $IMG_DIR/initramfs.img
+IMG_FILE=$(mktemp)
+tinyramfs -f -k $VER $IMG_FILE
 
 VMLINUZ=$(ls /usr/lib/modules/*/vmlinuz)
 mkdir -p /boot/EFI/BOOT
@@ -16,7 +16,7 @@ binutils-objcopy \
   --add-section .osrel=/etc/os-release --change-section-vma .osrel=0x20000 \
   --add-section .cmdline=/etc/kernel/cmdline --change-section-vma .cmdline=0x30000 \
   --add-section .linux=${VMLINUZ} --change-section-vma .linux=0x2000000 \
-  --add-section .initrd=$IMG_DIR/initramfs.img --change-section-vma .initrd=0x3000000 \
+  --add-section .initrd=$IMG_FILE --change-section-vma .initrd=0x3000000 \
   /usr/share/efistub/efi.stub /boot/EFI/BOOT/BOOTX64.EFI
 
-rm -r $IMG_DIR
+rm $IMG_FILE
