@@ -3,7 +3,7 @@
 pkgname=java-18-openjdk
 pkgver=18.0.2.1
 pkgrel=1
-arch=(x86_64 aarch64)
+arch=(x86_64 aarch64 riscv64)
 url="https://github.com/adoptium/temurin18-binaries"
 license=('GPL2')
 source=("${url}/releases/download/jdk-${pkgver}%2B1/OpenJDK18U-jdk_x64_alpine-linux_hotspot_${pkgver}_1.tar.gz")
