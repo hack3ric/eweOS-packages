@@ -1,16 +1,17 @@
 # Maintainer: Ziyao <ziyao@disroot.org>
 
 pkgname=ewe_pkgtool
-pkgver=4ec02c1
-pkgrel=1
-_commit=4ec02c188fbd47350a46303d82aedc5c3ee4df37
+pkgver=ea4f2bc
+pkgrel=0
+_commit=ea4f2bc641e1517991128a902d51df815a1bd7cb
 pkgdesc="Tools for packaging on eweOS"
 url="https://github.com/eweOS/ewe-pkgtool"
 arch=(x86_64 aarch64 riscv64)
 license=('MIT')
 depends=('musl' 'lua54')
 source=("ewe-pkgtool.zip::https://github.com/eweOS/ewe-pkgtool/archive/$_commit.zip")
-sha256sums=('c0a9355c1aa73c8c1a6901004941a2a9ff5160271ce1df2c60f9800170c4ad34')
+sha256sums=('218915ea1e21c049938abe86f54d6a5520fdd59ba367c13d6489b82d6576fc84')
+
 
 package() {
 	cd ewe-pkgtool-$_commit
